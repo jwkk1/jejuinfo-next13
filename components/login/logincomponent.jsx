@@ -1,13 +1,26 @@
 import Link from "next/link";
 import {signIn} from 'next-auth/react'
+import { useState } from "react";
 
 export default function LoginComponent() {
+
+    let [emailCheck, setEmailCheck] = useState(false);
+    let [passwordCheck, setPasswordCheck] = useState(false);
+    
     const login = async (e) => {
         // 원래 실행되는 이벤트 취소
         e.preventDefault();
         // Form 안에서 이메일, 패스워드 가져오기
         const email = e.target.email.value;
         const password = e.target.password.value;
+        if(!email){
+            setEmailCheck(true)
+            return
+        }
+        if(!password){
+            setPasswordCheck(true);
+            return
+        }
         const response = await signIn("email-password-credential", {
             email,
             password,
@@ -28,13 +41,15 @@ export default function LoginComponent() {
                     로그인
                 </label>
                 <input
-                    className="border rounded w-full py-2 px-3"
+                    className={`${emailCheck ? "border-red-500" : ''} border rounded w-full py-2 px-3`}
                     id="email" type="email" placeholder="아이디" />
+                    {emailCheck ? <label className="text-red-500">이메일을 입력해주세요</label> : ''}
                 </div>
                 <div className="mb-6">
                 <input
-                    className="border rounded w-full py-2 px-3"
+                    className={`${passwordCheck ? "border-red-500" : ''} border rounded w-full py-2 px-3`}
                     id="password" type="password" placeholder="비밀번호" />
+                    {passwordCheck ? <label className="text-red-500">비밀번호를 입력해주세요</label> : ''}
                 </div>
                 <div className="flex items-center justify-around">
                 <button
@@ -51,11 +66,11 @@ export default function LoginComponent() {
                 </Link>
                 </div>
                 <div className="flex item-center justify-center">
-                    <button
+                    {/* <button
                         className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 w-full"
                         type="button">
                         네이버로그인
-                    </button>
+                    </button> */}
                 </div>
             </form>
         </div>
