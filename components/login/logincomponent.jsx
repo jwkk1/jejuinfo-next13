@@ -53,13 +53,13 @@ export default function LoginComponent() {
                 </div>
                 <div className="flex items-center justify-around">
                 <button
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
                     type="submit" >
                     Sign In
                 </button>
                 <Link href={'/login/signup'}>
                     <button
-                        className="bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded"
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                         type="button">
                         Sign Up
                     </button>

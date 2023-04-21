@@ -1,9 +1,12 @@
 
 import MainLayout from '@/components/mainLayout/mainLayout'
+
 import Head from 'next/head'
 
 
 export default function Home() {
+
+
   return (
     <MainLayout>
       <Head>

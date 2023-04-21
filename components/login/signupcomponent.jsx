@@ -54,7 +54,7 @@ export default function SignupComponent() {
             <form className="bg-white p-6 rounded-lg shadow-md w-80" onSubmit={signUp}>
                 <div className="mb-4">
                 <label className="block text-gray-700 font-bold mb-2" htmlFor="username">
-                    로그인
+                    회원가입
                 </label>
                 <input
                     className={`${nameCheck ? "border-red-500" : ''} border rounded w-full py-2 px-3`}
