@@ -1,3 +1,5 @@
+'use client'
+
 import Link from "next/link";
 import {signIn, signOut} from 'next-auth/react'
 

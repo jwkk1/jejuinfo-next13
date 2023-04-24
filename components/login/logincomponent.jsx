@@ -1,3 +1,5 @@
+'use client'
+
 import Link from "next/link";
 import {signIn} from 'next-auth/react'
 import { useState } from "react";
@@ -57,7 +59,7 @@ export default function LoginComponent() {
                     type="submit" >
                     Sign In
                 </button>
-                <Link href={'/login/signup'}>
+                <Link href={'/signup'}>
                     <button
                         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                         type="button">
