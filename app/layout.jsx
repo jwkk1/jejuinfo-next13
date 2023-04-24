@@ -2,8 +2,8 @@
 import Footer from '@/components/mainLayout/footer'
 import Header from '@/components/mainLayout/header'
 import '@/styles/globals.css'
+import { Providers } from './globalRedux/provider'
 
-// import { store } from '@/store/store'
 // import { SessionProvider } from 'next-auth/react'
 // import { Provider } from 'react-redux'
 
@@ -17,13 +17,13 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         {/* <SessionProvider> */}
-          {/* <Provider store={store}> */}
+          <Providers>
           `<Header />
             <div className="flex min-h-screen items-center justify-center">
                 {children}
             </div>
             <Footer />
-          {/* </Provider> */}
+          </Providers>
         {/* </SessionProvider> */}
       </body>
     </html>
