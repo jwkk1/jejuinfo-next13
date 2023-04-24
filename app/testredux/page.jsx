@@ -3,8 +3,7 @@
 import {useSelector, useDispatch} from 'react-redux';
 import { increment } from '../globalRedux/features/counter/counterSlice';
 
-
-export default function TestRedux() {
+export default async function TestRedux() {
     const count = useSelector((state) => state.counter.value);
     const dispatch = useDispatch();
 
