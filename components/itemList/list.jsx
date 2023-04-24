@@ -1,25 +1,26 @@
 'use client'
 
 import { asyncSearchList } from "@/app/globalRedux/features/searchList/searchList";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
 
-export default function List() {
+export default function List(props) {
     const dispatch = useDispatch();
     const items = useSelector((state) => state.searchList);
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const query = searchParams.get('category')
 
-    console.log(items)
     useEffect(()=>{
         const params = {
             apiKey: process.env.NEXT_PUBLIC_API_KEY,
             locale: 'kr',
-            category: 'c3',
+            category: query,
             page: 1
         }
         dispatch(asyncSearchList(params))
-    },[])
+    },[query])
     if(items.value)
     return(
         <>

@@ -17,7 +17,7 @@ export default async function Header() {
                         <span className="ml-3 text-xl">Jeju Info</span>
                     </Link>
                     <nav className="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400	flex flex-wrap items-center text-base justify-center">
-                        <Link href='/search' className="mr-5 hover:text-gray-900">여행지 검색</Link>
+                        <Link href={{pathname:'/search', query:{category:'c1'}}} className="mr-5 hover:text-gray-900">여행지 검색</Link>
                         <Link href='/mypage' className="mr-5 hover:text-gray-900">내 여행지</Link>
                     </nav>
                     {
