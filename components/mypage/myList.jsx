@@ -4,6 +4,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import {  useSelector } from "react-redux"
+import Mockup from "../itemList/mockUp";
 
 export default function MyList() {
     const router = useRouter();
@@ -103,8 +104,10 @@ export default function MyList() {
                 )
             })
         }
-
         </>
-
+    )
+    if(!myList)
+    return(
+        <Mockup />
     )
 }

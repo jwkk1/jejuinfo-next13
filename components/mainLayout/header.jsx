@@ -7,7 +7,7 @@ import LoginCheck from "./loginCheck";
 
 export default async function Header() {
     const user = await getServerSession(authOptions) || '';
-
+    console.log(user)
     return(
         <>
             <header className="text-gray-600 body-font">
@@ -22,9 +22,10 @@ export default async function Header() {
                         <Link href={{pathname:'/search', query:{category:'c1'}}} className="mr-5 hover:text-gray-900">여행지 검색</Link>
                         <Link href='/mypage' className="mr-5 hover:text-gray-900">내 여행지</Link>
                     </nav>
+                    
                     {
                         user 
-                        ? <LogoutBtn />
+                        ? <><p className="mr-5">{user.user.email}</p><LogoutBtn /></>
                         : <LoginBtn />
                     }
                     <LoginCheck user={user.user} />
