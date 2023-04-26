@@ -1,37 +1,24 @@
 'use client'
 
-import { asyncSearchList, reset } from "@/app/globalRedux/features/searchList/searchList";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux"
-import Mockup from "./mockUp";
 
-export default function List() {
-    const dispatch = useDispatch();
-    const items = useSelector((state) => state.searchList);
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import {  useSelector } from "react-redux"
+
+export default function MyList() {
     const router = useRouter();
-    const searchParams = useSearchParams();
-    const query = searchParams.get('category');
     const email = useSelector((state) => state.auth.email);
     const [userList, setUserList] = useState('');
+    const [myList, setMyList] = useState('');
 
-
-    useEffect(()=>{
-        const params = {
-            apiKey: process.env.NEXT_PUBLIC_API_KEY,
-            locale: 'kr',
-            category: query,
-            page: 1
-        }
-        dispatch(asyncSearchList(params))
-        return () => dispatch(reset());
-    },[query]);
 
     useEffect(()=>{
         if(email){
             getUserList();
         }
     },[email])
+
+
 
     const getUserList = async () => {
         const result = await fetch('/api/searchlist/getuserlist', {
@@ -48,17 +35,13 @@ export default function List() {
         const userdata = data.data.map((item)=>{
             return item.contentsid
         })
+        setMyList(data.data);
         setUserList(userdata);
     }
 
     const addStar = async (e, item) => {
 
         e.stopPropagation();
-
-        if(!email){
-            alert('로그인이 필요합니다.')
-            return;
-        }
 
          const result = await fetch('/api/searchlist/add', {
             method: 'POST',
@@ -82,11 +65,11 @@ export default function List() {
         router.push(`/detail?cid=${item.contentsid}`)
     }
 
-    if(items.status === 'success')
+    if(myList)
     return(
         <>
         {
-            items.value.map((item, i)=>{
+            myList.map((item, i)=>{
                 let tag = item.alltag !== null ? item.alltag.split(',') : '';
 
                 if(tag || tag.length > 4){
@@ -120,13 +103,7 @@ export default function List() {
                 )
             })
         }
-        </>
-    )
-    if(items.status === 'loading' || items.status === 'ready')
 
-    return (
-        <>
-            <Mockup />
         </>
 
     )

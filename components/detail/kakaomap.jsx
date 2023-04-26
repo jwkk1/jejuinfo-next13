@@ -1,10 +1,14 @@
 'use client'
 
+import detail from "@/app/globalRedux/features/detail/detail";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 // import {kakao} from window;
 
 export default function KakaoMap() {
     const [mapLoaded, setMapLoaded] = useState(false);
+    const detailItem = useSelector((state)=> state.detail.value);
+    console.log(detailItem)
 
     useEffect(() => {
         const $script = document.createElement("script");
@@ -15,22 +19,34 @@ export default function KakaoMap() {
 
     useEffect(() => {
         if (!mapLoaded) return;
-        console.log(kakao.maps.load)
+        if (!detailItem) return;
+
         
         kakao.maps.load(() => {
-            var container = document.getElementById('map');
-            var options = {
-                      center: new kakao.maps.LatLng(33.450701, 126.570667),
-                      level: 3
+            let container = document.getElementById('map');
+            let options = {
+                      center: new kakao.maps.LatLng(detailItem.latitude,
+                        detailItem.longitude),
+                      level: 7
                   };
-          
-            var map = new kakao.maps.Map(container, options);
+            let markerPosition = new kakao.maps.LatLng(
+                detailItem.latitude,
+                detailItem.longitude,
+                );
+
+             let marker = new kakao.maps.Marker({
+                position: markerPosition,
+                });
+            
+            let map = new kakao.maps.Map(container, options);
+                marker.setMap(map);
 
         })
         
-      }, [mapLoaded]);
+      }, [mapLoaded, detailItem]);
+
     return(
-        <div id="map" style={{
+        <div id="map" className="rounded-lg" style={{
             width: "100%",
             height: "400px"
         }}></div>

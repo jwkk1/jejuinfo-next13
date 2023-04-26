@@ -13,6 +13,7 @@ const asyncGetDetail = createAsyncThunk(
 
 const initialState = {
     value: '',
+    
 }
 
 export const detailSlice = createSlice({

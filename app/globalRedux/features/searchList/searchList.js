@@ -13,6 +13,7 @@ const asyncSearchList = createAsyncThunk(
 
 const initialState = {
     value: '',
+    status : 'ready',
     totalCnt: 0,
 }
 
@@ -25,9 +26,13 @@ export const saerchListSlice = createSlice({
         },
     },
     extraReducers: (builder) => {
+        builder.addCase(asyncSearchList.pending, (state, action)=>{
+            state.status = 'loading'
+        }),
         builder.addCase(asyncSearchList.fulfilled, (state, action)=>{
             state.value = action.payload.items;
-            state.totalCnt = action.payload.totalCount
+            state.totalCnt = action.payload.totalCount;
+            state.status = 'success'
         })
     }
 });

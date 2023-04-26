@@ -2,7 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { asyncGetDetail } from "@/app/globalRedux/features/detail/detail";
+import { asyncGetDetail, reset } from "@/app/globalRedux/features/detail/detail";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function DetailList() {
@@ -22,6 +22,7 @@ export default function DetailList() {
             cid: cid,
         }
         dispatch(asyncGetDetail(params))
+        return () => dispatch(reset());
     },[]);
 
     useEffect(()=>{
@@ -55,6 +56,7 @@ export default function DetailList() {
     const addStar = async () => {
         if(!email){
             alert('로그인이 필요합니다.')
+            return;
         }
 
          const result = await fetch('/api/searchlist/add', {
@@ -79,7 +81,7 @@ export default function DetailList() {
     return(
         <div className="container px-5 py-24 mx-auto flex flex-wrap">
             <div className="lg:w-1/2 w-full mb-10 lg:mb-0 rounded-lg overflow-hidden">
-                <img alt="feature" className="object-cover object-center h-full w-full" src="https://api.cdn.visitjeju.net/photomng/imgpath/201804/30/a65e66f1-2abf-43e4-9b0b-533e683a5c71.gif" />
+                <img alt="feature" className="object-cover object-center h-full w-full" src={detailItem.repPhoto.photoid.thumbnailpath} />
             </div>
             <div className="flex flex-col flex-wrap lg:py-6 -mb-10 lg:w-1/2 lg:pl-12 lg:text-left text-center">
                 <div className="flex flex-col items-center h-10"  onClick={(e)=>{addStar(e)}}>
