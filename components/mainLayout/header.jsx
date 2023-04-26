@@ -3,9 +3,11 @@ import {getServerSession} from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import LoginBtn from "./loginBtn";
 import LogoutBtn from "./logoutBtn";
+import LoginCheck from "./loginCheck";
 
 export default async function Header() {
-    const user = await getServerSession(authOptions);
+    const user = await getServerSession(authOptions) || '';
+
     return(
         <>
             <header className="text-gray-600 body-font">
@@ -25,7 +27,7 @@ export default async function Header() {
                         ? <LogoutBtn />
                         : <LoginBtn />
                     }
-                    
+                    <LoginCheck user={user.user} />
                 </div>
             </header>
         </>
