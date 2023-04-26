@@ -5,10 +5,10 @@ export default function SearchList() {
     return (
         <section className="text-gray-600 body-font">
           <div className="container px-5 py-24 mx-auto">
-            <div className="flex flex-wrap w-full mb-20">
+            <div className="flex flex-wrap w-full mb-10">
               <div className="w-full mb-1 lg:mb-0">
-                <h1 className="text-6xl mb-4 text-gray-900">여행지 검색</h1>
-                <div className="h-1 w-20 bg-indigo-500 rounded" style={{height:'2px', width:'70px'}}></div>
+                <h1 className="text-2xl mb-4 text-gray-900">여행지 검색</h1>
+                <div className="h-1 w-20 bg-indigo-500 rounded"></div>
               </div>
             </div>
             <Category />
