@@ -7,6 +7,7 @@ import LoginCheck from "./loginCheck";
 
 export default async function Header() {
     const user = await getServerSession(authOptions) || '';
+    
     return(
         <>
             <header className="text-gray-600 body-font">
