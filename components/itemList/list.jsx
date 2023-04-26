@@ -14,6 +14,7 @@ export default function List() {
     const query = searchParams.get('category');
     const email = useSelector((state) => state.auth.email);
     const [userList, setUserList] = useState('');
+    console.log(items.value.length)
 
 
     useEffect(()=>{
@@ -82,7 +83,7 @@ export default function List() {
         router.push(`/detail?cid=${item.contentsid}`)
     }
 
-    if(items.status === 'success')
+    if(items.status === 'success' && items.value.length > 0)
     return(
         <>
         {

@@ -8,7 +8,6 @@ import { useSelector } from "react-redux";
 export default function KakaoMap() {
     const [mapLoaded, setMapLoaded] = useState(false);
     const detailItem = useSelector((state)=> state.detail.value);
-    console.log(detailItem)
 
     useEffect(() => {
         const $script = document.createElement("script");

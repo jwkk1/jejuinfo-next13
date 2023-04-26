@@ -4,6 +4,8 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { asyncGetDetail, reset } from "@/app/globalRedux/features/detail/detail";
 import { useDispatch, useSelector } from "react-redux";
+import KakaoShare from "./kakaoShare";
+import Link from "next/link";
 
 export default function DetailList() {
     const dispatch = useDispatch();
@@ -79,7 +81,7 @@ export default function DetailList() {
 
     if(detailItem)
     return(
-        <div className="container px-5 py-24 mx-auto flex flex-wrap">
+        <div className="container px-5 py-24 mx-auto flex flex-wrap justify-center">
             <div className="lg:w-1/2 w-full mb-10 lg:mb-0 rounded-lg overflow-hidden">
                 <img alt="feature" className="object-cover object-center h-full w-full" src={detailItem.repPhoto.photoid.thumbnailpath} />
             </div>
@@ -96,11 +98,13 @@ export default function DetailList() {
                         <p>제주시내 상권에 위치하고 있는 모던한 이미지의 관광호텔"</p>
                         <h2 className="text-gray-900 text-lg title-font font-medium mb-3">카테고리</h2>
                         <p className="leading-relaxed text-base">{detailItem.contentscd.label}</p>
-                        <a className="mt-3 text-indigo-500 inline-flex items-center">다른 카테고리 찾아보기
-                            <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 ml-2" viewBox="0 0 24 24" >
-                            <path d="M5 12h14M12 5l7 7-7 7"></path>
-                            </svg>
-                        </a>
+                        <Link href={'/search?category=c1'}>
+                            <p className="mt-3 text-indigo-500 inline-flex items-center">다른 카테고리 찾아보기
+                                <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 ml-2" viewBox="0 0 24 24" >
+                                <path d="M5 12h14M12 5l7 7-7 7"></path>
+                                </svg>
+                            </p>
+                        </Link>
                         <p className="leading-relaxed text-base">Context</p>
                         <p className="leading-relaxed text-base">{detailItem.roadaddress}</p>
                         <a className="mt-3 text-indigo-500 inline-flex items-center">카카오지도 앱으로 보기
@@ -108,6 +112,11 @@ export default function DetailList() {
                             <path d="M5 12h14M12 5l7 7-7 7"></path>
                             </svg>
                         </a>
+                        <div className="flex flex-col items-center justify-center mt-5 mb-5">
+                            <KakaoShare />
+                            <p>공유하기</p>
+                        </div>
+
                     </div>
                 </div>
             </div>

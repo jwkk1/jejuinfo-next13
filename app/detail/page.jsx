@@ -7,10 +7,10 @@ export default function Detail() {
             <section className="text-gray-600 body-font">
                <DetailList />
             </section>
-
             <section className="body-font">
                 <div className="flex flex-col">
                     <KakaoMap />
+
                 </div>
             </section>
         </div>
