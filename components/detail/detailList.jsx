@@ -95,7 +95,7 @@ export default function DetailList() {
                     <div >
                         <h2 className="text-gray-900 text-lg title-font font-medium mb-3">{detailItem.title}</h2>
                         <h3 className="tracking-widest text-indigo-500 text-xs font-medium title-font">#{detailItem.tag.replace(/,/g,'#')}</h3>
-                        <p>제주시내 상권에 위치하고 있는 모던한 이미지의 관광호텔"</p>
+                        <p>{detailItem.introduction}</p>
                         <h2 className="text-gray-900 text-lg title-font font-medium mb-3">카테고리</h2>
                         <p className="leading-relaxed text-base">{detailItem.contentscd.label}</p>
                         <Link href={'/search?category=c1'}>
