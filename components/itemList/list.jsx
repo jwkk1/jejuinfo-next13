@@ -100,7 +100,7 @@ export default function List() {
                 return(
                     <div className="xl:w-1/4 md:w-1/2 p-4" key={item.contentsid} onClick={()=>{enterDetail(item)}}>
                         <div className="bg-gray-100 p-6 rounded-lg" style={{minHeight : '25rem'}}>
-                            <img className="h-40 rounded w-full object-cover object-center mb-6" src={item.repPhoto.photoid.thumbnailpath} alt="content" />
+                            <img className="h-40 rounded w-full object-cover object-center mb-6" src={item.repPhoto == null ? '' : item.repPhoto.photoid.thumbnailpath} alt="content" />
                             <div className="items-center">
                                 <div>
                                     <h3 className="tracking-widest text-indigo-500 text-xs font-medium title-font">{tag}</h3>
