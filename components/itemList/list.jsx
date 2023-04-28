@@ -14,7 +14,6 @@ export default function List() {
     const query = searchParams.get('category');
     const email = useSelector((state) => state.auth.email);
     const [userList, setUserList] = useState('');
-    console.log(items.value.length)
 
 
     useEffect(()=>{
@@ -102,7 +101,7 @@ export default function List() {
                     <div className="xl:w-1/4 md:w-1/2 p-4" key={item.contentsid} onClick={()=>{enterDetail(item)}}>
                         <div className="bg-gray-100 p-6 rounded-lg" style={{minHeight : '25rem'}}>
                             <img className="h-40 rounded w-full object-cover object-center mb-6" src={item.repPhoto.photoid.thumbnailpath} alt="content" />
-                            <div className="flex items-center">
+                            <div className="items-center">
                                 <div>
                                     <h3 className="tracking-widest text-indigo-500 text-xs font-medium title-font">{tag}</h3>
                                 </div>
@@ -112,17 +111,17 @@ export default function List() {
                                     </svg>
                                 </div>
                             </div>
+                                <div className="w-full">
                                 <h2 className="text-lg text-gray-900 font-medium title-font mb-4">{item.title} </h2>
                                 <p className="leading-relaxed text-base">{item.roadaddress}</p>
-
+                                </div>
                          </div>
                     </div>
-                    
                 )
             })
         }
         </>
-    )
+    );
     if(items.status === 'loading' || items.status === 'ready')
 
     return (
@@ -130,5 +129,5 @@ export default function List() {
             <Mockup />
         </>
 
-    )
+    );
 }

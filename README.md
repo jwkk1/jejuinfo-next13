@@ -9,7 +9,7 @@ JEJU INFO
 http://jeju-6-env.eba-qmgujw3b.ap-northeast-2.elasticbeanstalk.com/
 
 
-## 개발 환경 설정
+## 개발 환경
 
 <img src="https://img.shields.io/badge/nextdotjs-000000?style=for-the-badge&logo=nextdotjs&logoColor=white">
 
