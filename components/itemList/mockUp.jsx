@@ -14,7 +14,7 @@ export default function Mockup(){
                                 <img className="h-40 rounded w-full object-cover object-center mb-6" src="https://www.polytec.com.au/img/products/960-960/mercurio-grey.jpg" alt="content" />
                                 <div className="flex items-center ">
                                     <div>
-                                    <div class="bg-gray-600 w-200 h-50 text-grey-600 text-center">■■■■■■■■■■■■■■■</div>
+                                    <div className="bg-gray-600 w-200 h-50 text-grey-600 text-center">■■■■■■■■■■■■■■■</div>
                                     </div>
                                     <div className="w-7 h-auto ml-auto">
                                         <svg fill='yellow' stroke="yellow" strokeWidth="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
