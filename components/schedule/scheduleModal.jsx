@@ -9,8 +9,14 @@ export default function ScheduleMoadal({setShowModal}){
     const handleSubmit = async (e) => {
 
         e.preventDefault();
+        let thumbnail = '';
+
         if(!e.target.title.value) return
         if(!e.target.description.value) return
+        if(e.target.thumbnail.files[0]){
+            const uploded = await upload(e.target.thumbnail.files[0]);
+            thumbnail = uploded.url;
+        }
 
         const result = await fetch('/api/schedule/post', {
             method: 'POST',
@@ -20,7 +26,7 @@ export default function ScheduleMoadal({setShowModal}){
             body: JSON.stringify({
               title: e.target.title.value,
               description : e.target.description.value,
-              thumbnail : e.target.thumbnail || '',
+              thumbnail : thumbnail,
               email : user.email,
             })
           });
@@ -30,6 +36,20 @@ export default function ScheduleMoadal({setShowModal}){
 
         setShowModal(false)
     }
+
+    const upload = async (file) => {
+            const url = process.env.NEXT_PUBLIC_CLOUDNARY_URL;
+          
+            const formData = new FormData();
+            formData.append("file", file);
+            formData.append("upload_preset", "docs_upload_example_us_preset");
+        
+            const result = await fetch(url, {
+              method: "POST",
+              body: formData,
+            });
+            return result.json();
+        }
 
     return(
         <div className="fixed z-10 inset-0 overflow-y-auto">
@@ -76,7 +96,7 @@ export default function ScheduleMoadal({setShowModal}){
                                 </label>
                                 <p className="mb-2 text-gray-400">미선택 시 기본사진으로 대체됩니다.</p>
                                 <input
-                                    name="photo"
+                                    name="thumbnail"
                                     type="file"
                                     className="py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 />
