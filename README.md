@@ -15,6 +15,7 @@ http://jeju-6-env.eba-qmgujw3b.ap-northeast-2.elasticbeanstalk.com/
 * visitJeju API 연동
 * 즐겨찾기 저장, mongoDB 연동
 * SNS공유 및 지도 연동
+* 여행일정 플래너 (개발중)
 
 
 ## 테스트계정
