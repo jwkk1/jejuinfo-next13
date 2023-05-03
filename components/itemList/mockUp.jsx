@@ -10,11 +10,11 @@ export default function Mockup(){
                 array.map((a, i)=>{
                     return(
                         <div className="xl:w-1/4 md:w-1/2 p-4" key={i}>
-                            <div className="bg-gray-100 p-6 rounded-lg" style={{minHeight : '25rem'}}>
+                            <div className="bg-gray-100 p-6 rounded-lg " style={{minHeight : '25rem'}}>
                                 <img className="h-40 rounded w-full object-cover object-center mb-6" src="https://www.polytec.com.au/img/products/960-960/mercurio-grey.jpg" alt="content" />
-                                <div className="flex items-center">
+                                <div className="flex items-center ">
                                     <div>
-                                        <h3 className="tracking-widest text-indigo-500 text-xs font-medium title-font">■■■■■■■■■■■■</h3>
+                                    <div class="bg-gray-600 w-200 h-50 text-grey-600 text-center">■■■■■■■■■■■■■■■</div>
                                     </div>
                                     <div className="w-7 h-auto ml-auto">
                                         <svg fill='yellow' stroke="yellow" strokeWidth="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -22,8 +22,14 @@ export default function Mockup(){
                                         </svg>
                                     </div>
                                 </div>
-                                <h2 className="text-lg text-gray-900 font-medium title-font mb-4">■■■■■■■■■■■■■■■</h2>
-                                <p className="leading-relaxed text-base">■■■■■■■■■■■■■■■■■</p>
+                                <div className="bg-gray-600 w-200 h-50 text-grey-600 text-center"> 
+                                    <h2 className="text-lg text-gray-600 font-medium title-font mb-4">■■■■■■■■■■■■■■■</h2>
+                                  
+                                </div>
+                                <div className="bg-gray-600 w-200 h-50 text-grey-600 text-center"> 
+                                    <p className="leading-relaxed text-base">■■■■■■■■■■■■■■
+                                    ■■■■■■■■■</p>
+                                </div>
                             </div>
                         </div>
                     )
