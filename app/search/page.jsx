@@ -3,7 +3,7 @@ import Category from "@/components/search/category";
 
 export default function SearchList() {
     return (
-        <section className="text-gray-600 body-font">
+        <section className="text-gray-600 body-font min-h-screen min-w-full">
           <div className="container px-5 py-24 mx-auto">
             <div className="flex flex-wrap w-full mb-10">
               <div className="w-full mb-1 lg:mb-0">

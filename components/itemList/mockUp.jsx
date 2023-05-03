@@ -7,9 +7,9 @@ export default function Mockup(){
     return(
         <div className="flex flex-wrap -m-4">
             {
-                array.map(()=>{
+                array.map((a, i)=>{
                     return(
-                        <div className="xl:w-1/4 md:w-1/2 p-4" >
+                        <div className="xl:w-1/4 md:w-1/2 p-4" key={i}>
                             <div className="bg-gray-100 p-6 rounded-lg" style={{minHeight : '25rem'}}>
                                 <img className="h-40 rounded w-full object-cover object-center mb-6" src="https://www.polytec.com.au/img/products/960-960/mercurio-grey.jpg" alt="content" />
                                 <div className="flex items-center">

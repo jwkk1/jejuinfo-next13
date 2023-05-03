@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import {  useSelector } from "react-redux"
 import Mockup from "../itemList/mockUp";
+import NullList from "../nullList/nullList";
 
 export default function MyList() {
     const router = useRouter();
@@ -17,7 +18,9 @@ export default function MyList() {
         if(email){
             getUserList();
         }
+
     },[email])
+
 
 
 
@@ -66,7 +69,7 @@ export default function MyList() {
         router.push(`/detail?cid=${item.contentsid}`)
     }
 
-    if(myList)
+    if(myList.length > 0)
     return(
         <>
         {
@@ -106,8 +109,17 @@ export default function MyList() {
         }
         </>
     )
+
+    //loding
     if(!myList)
     return(
         <Mockup />
     )
+
+    //null
+    if(myList.length === 0)
+    return(
+        <NullList />
+    )
+    
 }
