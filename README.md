@@ -9,6 +9,20 @@ JEJU INFO
 http://jeju-6-env.eba-qmgujw3b.ap-northeast-2.elasticbeanstalk.com/
 
 
+## 구현기능
+
+* 회원가입 / 로그인 / 로그아웃
+* visitJeju API 연동
+* 즐겨찾기 저장, mongoDB 연동
+* SNS공유 및 지도 연동
+
+
+## 테스트계정
+
+email : test@test.com
+password : 1234
+
+
 ## 개발 환경
 
 <img src="https://img.shields.io/badge/nextdotjs-000000?style=for-the-badge&logo=nextdotjs&logoColor=white">
