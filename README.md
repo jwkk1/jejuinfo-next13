@@ -1,5 +1,4 @@
-JEJU INFO 
-=============
+
 # JEJU INFO
 > next13 신규문법 app 디렉토리활용, visitJeju API를 이용한 제주 관광정보 웹
 
