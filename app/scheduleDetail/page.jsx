@@ -1,11 +1,14 @@
 'use client'
 
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function ScheduleDetail(){
     const [detailList, setDetailList] = useState('');
+    const searchParams = useSearchParams();
 
     useEffect(()=>{
+        console.log(searchParams)
         getDetailList();
     },[]);
 
@@ -16,16 +19,17 @@ export default function ScheduleDetail(){
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-              id: '6452149395ce421b1778a45a',
-              email: 'test@test.com',
+              id: searchParams.get('_id'),
+              email: searchParams.get('email'),
             })
           });
 
         const data = await result.json();
+        console.log(data)
         setDetailList(data.data);
 
     }
-    
+
     if(detailList)
     return(
         <div>

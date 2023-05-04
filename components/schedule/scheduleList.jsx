@@ -34,7 +34,7 @@ export default function ScheduleList() {
     }
 
     const onClickdetail = (e, id) => {
-        router.push(`/scheduleDetail?email=${user.email}?_id=${id}`)
+        router.push(`/scheduleDetail?email=${user.email}&_id=${id}`)
     }
 
 
@@ -63,7 +63,7 @@ export default function ScheduleList() {
 
 
             
-            {showModal && ( <ScheduleMoadal setShowModal={setShowModal}/>)}
+            {showModal && ( <ScheduleMoadal setShowModal={setShowModal} getUserList={getUserList} />)}
 
         </>
     )

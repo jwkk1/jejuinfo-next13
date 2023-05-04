@@ -7,7 +7,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import dayjs from 'dayjs';
 
 
-export default function ScheduleMoadal({setShowModal}){
+export default function ScheduleMoadal({setShowModal, getUserList}){
     const user = useSelector((state) => state.auth.email);
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
@@ -61,6 +61,7 @@ export default function ScheduleMoadal({setShowModal}){
         if(data.message === 'duplicateSchedule') alert('중복된 플래너 제목입니다.');
 
         setShowModal(false);
+        getUserList();
     }
 
     const upload = async (file) => {
