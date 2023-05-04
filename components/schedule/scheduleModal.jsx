@@ -1,9 +1,29 @@
 'use client'
 
 import { useSelector } from "react-redux";
+import DatePicker from "react-datepicker";
+import { useState } from "react";
+import 'react-datepicker/dist/react-datepicker.css';
+import dayjs from 'dayjs';
+
 
 export default function ScheduleMoadal({setShowModal}){
     const user = useSelector((state) => state.auth.email);
+    const [startDate, setStartDate] = useState(null);
+    const [endDate, setEndDate] = useState(null);
+    const [file, setFile] = useState(null); 
+
+    const handleFileChange = (e) => {
+      setFile(e.target.files[0]);
+    };
+
+    const handleStartDateChange = (date) => {
+        setStartDate(date);
+      };
+    
+    const handleEndDateChange = (date) => {
+        setEndDate(date);
+      };
 
 
     const handleSubmit = async (e) => {
@@ -11,12 +31,16 @@ export default function ScheduleMoadal({setShowModal}){
         e.preventDefault();
         let thumbnail = '';
 
-        if(!e.target.title.value) return
-        if(!e.target.description.value) return
-        if(e.target.thumbnail.files[0]){
-            const uploded = await upload(e.target.thumbnail.files[0]);
+        if(!e.target.title.value) return;
+        if(!e.target.description.value) return;
+        if(!startDate) return;
+        if(!endDate) return;
+        if(file){
+            const uploded = await upload(file);
             thumbnail = uploded.url;
         }
+        const startDt = dayjs(startDate).format('YYYY-MM-DD'); 
+        const endDt = dayjs(endDate).format('YYYY-MM-DD'); 
 
         const result = await fetch('/api/schedule/post', {
             method: 'POST',
@@ -27,6 +51,8 @@ export default function ScheduleMoadal({setShowModal}){
               title: e.target.title.value,
               description : e.target.description.value,
               thumbnail : thumbnail,
+              startDate : startDt,
+              endDate : endDt,
               email : user.email,
             })
           });
@@ -34,7 +60,7 @@ export default function ScheduleMoadal({setShowModal}){
         const data = await result.json();
         if(data.message === 'duplicateSchedule') alert('중복된 플래너 제목입니다.');
 
-        setShowModal(false)
+        setShowModal(false);
     }
 
     const upload = async (file) => {
@@ -74,34 +100,74 @@ export default function ScheduleMoadal({setShowModal}){
                                 <input
                                     name="title"
                                     type="text"
-                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    className="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50"
                                     placeholder="5월 제주여행"
                                 />
-                                </div>
-                                <div className="mb-4">
+                            </div>
+                            <div className="mb-4">
                                 <label htmlFor="content" className="block text-gray-700  mb-2">
                                     설명
                                     <span className="text-red-500">*</span>
                                 </label>
                                 <textarea
                                     name="description"
-                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    className="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50"
                                     placeholder="내용을 입력하세요"
                                     rows="5"
                                 ></textarea>
+                            </div>
+                            <div className="flex gap-4 mb-5 justify-between">
+                                <div className="w-52">
+                                    <label htmlFor="start-date-picker" className="block text-sm font-medium text-gray-700">
+                                    시작 날짜
+                                    <span className="text-red-500">*</span>
+                                    </label>
+                                    <DatePicker
+                                        id="start-date-picker"
+                                        selected={startDate}
+                                        onChange={handleStartDateChange}
+                                        selectsStart
+                                        startDate={startDate}
+                                        endDate={endDate}
+                                        dateFormat="yyyy.MM.dd"
+                                        placeholderText="시작 날짜 선택"
+                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50"
+                                    />
                                 </div>
-                                <div className="mb-4">
-                                <label htmlFor="photo" className="block text-gray-700 ">
+                                <div className="w-52">
+                                    <label htmlFor="end-date-picker" className="block text-sm font-medium text-gray-700">
+                                    종료 날짜
+                                    <span className="text-red-500">*</span>
+                                    </label>
+                                    <DatePicker
+                                        id="end-date-picker"
+                                        selected={endDate}
+                                        onChange={handleEndDateChange}
+                                        selectsEnd
+                                        startDate={startDate}
+                                        endDate={endDate}
+                                        dateFormat="yyyy.MM.dd"
+                                        placeholderText="종료 날짜 선택"
+                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50"
+                                    />
+                                </div>
+                            </div>
+                            <div className="mb-5">
+                                <label htmlFor="thumbnail" className="block text-gray-700 ">
                                     썸네일 
+                                    <img className="w-16" src="upload.png" alt="파일 업로드 아이콘" />
                                 </label>
                                 <p className="mb-2 text-gray-400">미선택 시 기본사진으로 대체됩니다.</p>
                                 <input
                                     name="thumbnail"
+                                    id="thumbnail"
                                     type="file"
+                                    style={{ display: "none" }}
                                     className="py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    onChange={handleFileChange}
                                 />
-                                </div>
-                                <div className="flex items-center justify-center">
+                            </div>
+                            <div className="flex items-center justify-center">
                                 <button
                                     className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                                     type="submit"

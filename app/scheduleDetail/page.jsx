@@ -25,6 +25,7 @@ export default function ScheduleDetail(){
         setDetailList(data.data);
 
     }
+    
     if(detailList)
     return(
         <div>

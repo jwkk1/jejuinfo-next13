@@ -21,3 +21,9 @@
   top:calc(50% - 30px);
   left:calc(50% - 30px);
 }
+
+
+.react-datepicker-wrapper {
+  width: 150px;
+}
+
