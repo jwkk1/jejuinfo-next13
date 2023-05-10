@@ -14,20 +14,19 @@ export default function ScheduleMoadal({setShowModal, getUserList}){
     const [file, setFile] = useState(null); 
 
     const handleFileChange = (e) => {
-      setFile(e.target.files[0]);
+        setFile(e.target.files[0]);
     };
 
     const handleStartDateChange = (date) => {
         setStartDate(date);
-      };
+    };
     
     const handleEndDateChange = (date) => {
         setEndDate(date);
-      };
+    };
 
 
     const handleSubmit = async (e) => {
-
         e.preventDefault();
         let thumbnail = '';
 
@@ -65,18 +64,18 @@ export default function ScheduleMoadal({setShowModal, getUserList}){
     }
 
     const upload = async (file) => {
-            const url = process.env.NEXT_PUBLIC_CLOUDNARY_URL;
-          
-            const formData = new FormData();
-            formData.append("file", file);
-            formData.append("upload_preset", "docs_upload_example_us_preset");
+        const url = process.env.NEXT_PUBLIC_CLOUDNARY_URL;
         
-            const result = await fetch(url, {
-              method: "POST",
-              body: formData,
-            });
-            return result.json();
-        }
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("upload_preset", "docs_upload_example_us_preset");
+    
+        const result = await fetch(url, {
+            method: "POST",
+            body: formData,
+        });
+        return result.json();
+    }
 
     return(
         <div className="fixed z-10 inset-0 overflow-y-auto">
@@ -181,6 +180,5 @@ export default function ScheduleMoadal({setShowModal, getUserList}){
                 </div>
             </div>
         </div>
-
-    )
+    );
 }

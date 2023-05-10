@@ -81,7 +81,7 @@ export default function DetailList() {
 
     if(detailItem)
     return(
-        <div className="container px-5 py-24 mx-auto flex flex-wrap justify-center">
+        <div className="container px-5 py-12 mx-auto flex flex-wrap justify-center">
             <div className="lg:w-1/2 w-full mb-10 lg:mb-0 rounded-lg overflow-hidden">
                 <img alt="feature" className="object-cover object-center h-full w-full" src={detailItem.repPhoto.photoid.thumbnailpath} />
             </div>

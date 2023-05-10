@@ -13,16 +13,11 @@ export default function MyList() {
     const [userList, setUserList] = useState('');
     const [myList, setMyList] = useState('');
 
-
     useEffect(()=>{
         if(email){
             getUserList();
         }
-
     },[email])
-
-
-
 
     const getUserList = async () => {
         const result = await fetch('/api/searchlist/getuserlist', {

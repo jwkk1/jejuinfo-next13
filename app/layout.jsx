@@ -13,11 +13,11 @@ export const metadata = {
 export default async function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
+      <body className='min-h-screen'>
         {/* <SessionProvider> */}
           <Providers>
           `<Header />
-            <div className="flex items-center justify-center" style={{minHeight: '100vh'}}>
+            <div className="flex items-center justify-center min-h-full">
                 {children}
             </div>
             <Footer />

@@ -61,8 +61,6 @@ export default function ScheduleList() {
                 })
             }
 
-
-            
             {showModal && ( <ScheduleMoadal setShowModal={setShowModal} getUserList={getUserList} />)}
 
         </>

@@ -11,8 +11,8 @@ export default async function Schedule() {
             {
                 user ==='' 
                 ? <LoginComponent />
-                :  <section className="text-gray-600 body-font  min-h-screen min-w-full">
-                        <div className="container px-5 py-24 mx-auto">
+                :  <section className="text-gray-600 body-font h-full min-w-full">
+                        <div className="container px-5 py-12 mx-auto">
                             <div className="flex flex-wrap w-full mb-10">
                                 <div className="lg:w-1/2 w-full mb-6 lg:mb-0">
                                     <h1 className="text-2xl mb-4 text-gray-900">일정플래너</h1>
