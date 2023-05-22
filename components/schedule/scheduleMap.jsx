@@ -3,8 +3,10 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-export default function ScheduleMap() {
+export default function ScheduleMap({item}) {
     const [mapLoaded, setMapLoaded] = useState(false);
+
+
 
 
     useEffect(() => {
@@ -16,6 +18,12 @@ export default function ScheduleMap() {
 
     useEffect(() => {
         if (!mapLoaded) return;
+        const lat = item.map(function(obj) {
+            return {
+              lat: obj.latitude ,
+              lng: obj.longitude
+            };
+          });
         
         kakao.maps.load(() => {
             let container = document.getElementById('map');
@@ -24,21 +32,26 @@ export default function ScheduleMap() {
                         126.5),
                       level: 10
                   };
-            let markerPosition = new kakao.maps.LatLng(
-                33.5,
-                126.5,
-                );
 
-             let marker = new kakao.maps.Marker({
-                position: markerPosition,
-                });
             
             let map = new kakao.maps.Map(container, options);
+
+
+            let markerPositions = [
+                ...lat
+                // 추가 위치 정보
+                ];
+            
+                for (let i = 0; i < markerPositions.length; i++) {
+                let marker = new kakao.maps.Marker({
+                    position: new kakao.maps.LatLng(markerPositions[i].lat, markerPositions[i].lng)
+                });
                 marker.setMap(map);
+                }
 
         })
         
-      }, [mapLoaded ]);
+      }, [mapLoaded, item]);
 
     return(
         <div id="map" className="rounded-lg h-full" style={{

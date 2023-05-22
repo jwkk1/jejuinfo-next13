@@ -40,6 +40,18 @@ export default function ScheduleMoadal({setShowModal, getUserList}){
         }
         const startDt = dayjs(startDate).format('YYYY-MM-DD'); 
         const endDt = dayjs(endDate).format('YYYY-MM-DD'); 
+        const endDayjs = dayjs(endDt);
+        const StartDayjs = dayjs(startDt);
+        const length = endDayjs.diff(StartDayjs, 'day') + 1;
+
+        const plan = {
+            addList : [],
+        };
+
+        for (let i = 1; i <= length; i++) {
+            const day = 'day' + i;
+            plan[day] = [];
+        }
 
         const result = await fetch('/api/schedule/post', {
             method: 'POST',
@@ -52,6 +64,7 @@ export default function ScheduleMoadal({setShowModal, getUserList}){
               thumbnail : thumbnail,
               startDate : startDt,
               endDate : endDt,
+              plan : plan,
               email : user.email,
             })
           });

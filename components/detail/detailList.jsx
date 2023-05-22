@@ -23,7 +23,7 @@ export default function DetailList() {
             locale: 'kr',
             cid: cid,
         }
-        dispatch(asyncGetDetail(params))
+        dispatch(asyncGetDetail(params));
         return () => dispatch(reset());
     },[]);
 
