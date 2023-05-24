@@ -6,9 +6,6 @@ import { useSelector } from "react-redux";
 export default function ScheduleMap({item}) {
     const [mapLoaded, setMapLoaded] = useState(false);
 
-
-
-
     useEffect(() => {
         const $script = document.createElement("script");
         $script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAOMAP_KEY}&autoload=false`;
@@ -18,17 +15,18 @@ export default function ScheduleMap({item}) {
 
     useEffect(() => {
         if (!mapLoaded) return;
-        const lat = item.map(function(obj) {
-            return {
-              lat: obj.latitude ,
-              lng: obj.longitude
-            };
-          });
+
+        const lat = Object.keys(item).reduce((result, key) => {
+          const dayArray = item[key];
+          const extractedItems = dayArray.map(item => ({ lat: item.latitude, lng: item.longitude }));
+          return result.concat(extractedItems);
+        }, []);
+        
         
         kakao.maps.load(() => {
             let container = document.getElementById('map');
             let options = {
-                      center: new kakao.maps.LatLng(33.5,
+                      center: new kakao.maps.LatLng(33.4,
                         126.5),
                       level: 10
                   };
@@ -36,15 +34,21 @@ export default function ScheduleMap({item}) {
             
             let map = new kakao.maps.Map(container, options);
 
+            var markerImage = new kakao.maps.MarkerImage(
+              '/marker.png',
+              new kakao.maps.Size(35, 35),
+              { offset: new kakao.maps.Point(10, 10) }
+            );
+
 
             let markerPositions = [
                 ...lat
-                // 추가 위치 정보
                 ];
             
                 for (let i = 0; i < markerPositions.length; i++) {
                 let marker = new kakao.maps.Marker({
-                    position: new kakao.maps.LatLng(markerPositions[i].lat, markerPositions[i].lng)
+                    position: new kakao.maps.LatLng(markerPositions[i].lat, markerPositions[i].lng),
+                    image: markerImage
                 });
                 marker.setMap(map);
                 }

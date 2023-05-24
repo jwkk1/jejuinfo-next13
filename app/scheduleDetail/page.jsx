@@ -22,6 +22,12 @@ export default function ScheduleDetail(){
         getDetailList();
     },[]);
 
+    useEffect(() => {
+        if (plan !== null) {
+          updatePlan();
+        }
+      }, [plan]);
+
     const getDetailList = async () => {
         const result = await fetch('/api/schedule/detail/get', {
             method: 'POST',
@@ -39,6 +45,25 @@ export default function ScheduleDetail(){
         setPlan(data.data.plan);
         console.log(plan);
     }   
+
+    const updatePlan = async () => {
+        const result = await fetch('/api/schedule/plan/post', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              id: searchParams.get('_id'),
+              email : searchParams.get('email'),
+              plan : plan,
+            })
+          });
+
+          const data = await result.json();
+          if(data.status !== 200){
+            console.log('fail');
+          }
+    }
 
     const handleSearch = async (e) => {
         if(!searchKeyword) return;
@@ -69,6 +94,7 @@ export default function ScheduleDetail(){
           updatedItems[sourceGroupId].splice(result.destination.index, 0, removed);
     
           setPlan(updatedItems);
+
         } else {
           const sourceItems = Array.from(plan[sourceGroupId]);
           const destinationItems = Array.from(plan[destinationGroupId]);
@@ -92,7 +118,7 @@ export default function ScheduleDetail(){
         <DragDropContext onDragEnd={handleDragEnd}>
             <section className="text-gray-600 body-font relative w-full lg:mx-5 md:mx-2" style={{height : '40rem'}}>
                 <div className="absolute inset-0 bg-gray-300">
-                    <ScheduleMap item={detailList.plan.addList}/>
+                    <ScheduleMap item={detailList.plan}/>
                 </div>
                 <div className="py-12 flex mx-3 h-full">
                     <div className="lg:w-80 md:w-64 bg-white rounded-lg p-4 flex flex-col mt-10 md:mt-0 relative z-10 shadow-md overflow-auto">
@@ -107,41 +133,42 @@ export default function ScheduleDetail(){
                                     {/* <div className="border-b border-gray-300">플랜</div> */}
 
                                     <div>
-                                        {Object.keys(plan).map((groupId, i) => (
-                                        <Droppable key={groupId} droppableId={groupId}>
-                                            {(provided) => (
-                                                
-                                            <div
-                                                ref={provided.innerRef}
-                                                {...provided.droppableProps}
-                                            > 
-                                                <div className="border-b border-gray-300">
-                                                    {i === 0 ? '플랜' : `day ${i}`}
+                                        {plan &&
+                                            Object.keys(plan).map((groupId, i) => (
+                                            <Droppable key={groupId} droppableId={groupId}>
+                                                {(provided) => (
+                                                    
+                                                <div
+                                                    ref={provided.innerRef}
+                                                    {...provided.droppableProps}
+                                                > 
+                                                    <div className="border-b border-gray-300">
+                                                        {i === 0 ? '플랜' : `day ${i}`}
+                                                    </div>
+                                                    {   
+                                                    
+                                                        plan[groupId].map((item, index) => (
+                                                        <Draggable key={item.id} draggableId={item.id} index={index}>
+                                                            {(provided,snapshot) => (
+                                                            <div
+                                                                className={`w-full`}
+                                                                ref={provided.innerRef}
+                                                                {...provided.draggableProps}
+                                                                {...provided.dragHandleProps}
+                                                            >
+                                                                
+                                                                <TourCard item={item} key={index}/>
+                                                            </div>
+                                                            )}
+                                                        </Draggable>
+                                                        ))
+                                                    }
+                                                {provided.placeholder}
                                                 </div>
-                                                {   
-                                                
-                                                    plan[groupId].map((item, index) => (
-                                                    <Draggable key={item.id} draggableId={item.id} index={index}>
-                                                        {(provided,snapshot) => (
-                                                        <div
-                                                            className={`w-full`}
-                                                            ref={provided.innerRef}
-                                                            isDragging={snapshot.isDragging}
-                                                            {...provided.draggableProps}
-                                                            {...provided.dragHandleProps}
-                                                        >
-                                                            
-                                                            <TourCard item={item} key={index}/>
-                                                        </div>
-                                                        )}
-                                                    </Draggable>
-                                                    ))
-                                                }
-                                               {provided.placeholder}
-                                            </div>
-                                            )}
-                                        </Droppable>
-                                        ))}
+                                                )}
+                                            </Droppable>
+                                            ))
+                                        }
                                     </div>
                                 </div>
                             </div>
